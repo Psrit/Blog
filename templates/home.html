@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+
+{% block content %}
+    <div class="posts">
+        {% for post in post_list %}
+            <section class="post">
+                <header class="post-header">
+                    <h2 class="post-title">
+                        {{ post.title }}
+                    </h2>
+
+                    <p class="post-meta">
+                        Time: <a class="post-author" href="#">{{ post.date_time }}</a>
+                    </p>
+                </header>
+
+                <div class="post-description">
+                    <p>
+                        {{ post.content|custom_markdown|truncatewords_html:50 }}
+                    </p>
+                </div>
+                <a class="pure-button" href="{% url "article:detail" post.id %}"> Read More >>> </a>
+
+            </section>
+
+            <hr/>
+        {% endfor %}
+
+        {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+            <div>
+                <ul class="pure-paginator" style="text-align:center; padding-top: 1.5em">
+                    {% if post_list.has_previous %}
+                        <li><a class="pure-button prev" href="?page={{ post_list.previous_page_number }}">
+                            &#171;
+                        </a></li>
+                    {% endif %}
+                    {#                    <li><a class="pure-button" href="#">1</a></li>#}
+
+                    <li><a class="pure-button pure-button-active" href="#">
+                        {{ post_list.number }} / {{ post_list.paginator.num_pages }}
+                    </a></li>
+
+                    {% if post_list.has_next %}
+                        <li><a class="pure-button next" href="?page={{ post_list.next_page_number }}">
+                            &#187;
+                        </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+{% endblock %}

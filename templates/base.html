@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+{% load custom_markdown %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
+
+    <title>{% block title %}Psrit's Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "pure.css" %}">
+    <link rel="stylesheet" href="{% static "grids-responsive-min.css" %}">
+    <link rel="stylesheet" href="{% static "blog.css" %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" type="text/css">
+
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style type="text/css">
+        .codehilite {
+            font-family: "Ubuntu Mono", monospace;
+        }
+
+        .pure-menu li {
+            display: inline;
+            position: relative;
+        }
+
+        #header-nav-list {
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <script src="{% static "jquery.js" %}"></script>
+    <script type="text/javascript">
+        function construction_notice() {
+            alert("Under Construction...>_<")
+        }
+    </script>
+
+    {% block scripts %}
+        {# We can use {{ block.super }} to get the block content in the super template. #}
+    {% endblock %}
+</head>
+
+<body>
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <h1 class="brand-title">Psrit's Blog</h1>
+            <h2 class="brand-tagline">It's nice to see you!</h2>
+            <nav class="nav" id="header-nav-list">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="button-success pure-button" href="/">
+                            主页
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="button-success pure-button"
+                           href="{% url "archives" %}">
+                            归档
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="button-success pure-button"
+                           onclick="construction_notice()">
+                            专题
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="button-success pure-button"
+                           onclick="construction_notice()">
+                            足迹
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="button-success pure-button"
+                           onclick="construction_notice()"
+                                {% comment %}href="{% url "about_me" %}"{% endcomment %}>
+                            About Me
+                        </a>
+                    </li>
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="pure-button" href="https://github.com/psrit">Github</a>#}
+                    {#                    </li>#}
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="pure-button" href="http://weibo.com/u/5054486665">Weibo</a>#}
+                    {#                    </li>#}
+
+                </ul>
+            </nav>
+            <form class="pure-form" action="{% url "article:search" %}" method="get">
+                <input class="pure-input-rounded" type="text" name="search"
+                       placeholder="Search"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            {% block content %}
+            {% endblock %}
+            <div class="footer">
+                <div class="pure-menu pure-menu-horizontal pure-menu-open">
+                    <ul style="padding: 0 0 0 0">
+                        <li class="pure-menu-item">
+                            <a {% comment %}href="{% url "about_me" %}"{% endcomment %}
+                                    onclick="construction_notice()"
+                                    class="pure-menu-link">About Me</a>
+                        </li>
+                        <li class="pure-menu-item">
+                            <a href="https://github.com/psrit" class="pure-menu-link">GitHub</a>
+                        </li>
+                        <li class="pure-menu-item">
+                            <a href="http://weibo.com/u/5054486665"
+                               class="pure-menu-link">Weibo</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

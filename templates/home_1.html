@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Blogs</h2>
+                {#                <h3 class="section-subheading text-muted"></h3>#}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    {% for post in post_list %}
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="{% static "img/about/1.jpg" %}" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>{{ post.date_time }}</h4>
+                                    <h4 class="subheading">{{ post.title }}</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">{{ post.content }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

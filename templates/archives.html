@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block scripts %}
+    <script src="{% static "jquery.js" %}"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $(".category_flip").click(
+                    function () {
+                        $(this).next().slideToggle("slow");
+                    }
+                );
+            }
+        );
+    </script>
+
+    <style type="text/css">
+        div.article_list_panel {
+            display: {{ display }};
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="posts">
+        {% if having_articles and category_list and category_list.count %}
+
+            {% for category in category_list %}
+                {% if category.article_set.count %}
+                    <section class="post">
+                        <header class="post-header category_flip">
+                            <h2 class="post-title">
+                                {{ category.name }}
+                            </h2>
+                        </header>
+                        <div class="article_list_panel">
+                            Related Blogs:
+                            <div>
+                                {% for article in category.article_set.all %}
+                                    <div>
+                                        <a href="{% url "article:detail" article.id %}">
+                                            {{ article.title }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+            {% block deal_with_special_cases %}
+                {% comment %}
+                If category_list is null (happening in search_tag when no such category is
+                found, or in archives when there are no categories at all),
+                or category_list is not null but is empty (no articles of this category found,
+                happening in search_tag),
+                or there is no articles at all (given by `having_articles`).
+                {% endcomment %}
+                <section class="post">
+                    <header class="post-header category_flip">
+                        <h2 class="post-title">
+                            Ah-oh!
+                        </h2>
+                    </header>
+                    <div>
+                        No categorie(s) found. :(
+                    </div>
+                </section>
+            {% endblock %}
+
+        {% endif %}
+    </div>
+{% endblock %}
