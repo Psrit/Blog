@@ -6,6 +6,7 @@
 
 # databases are ignored
 *.sqlite3
+agency-theme/
 
 
 # C++.gitignore

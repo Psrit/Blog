@@ -93,7 +93,7 @@
             </nav>
             <form class="pure-form" action="{% url "article:search" %}" method="get">
                 <input class="pure-input-rounded" type="text" name="search"
-                       placeholder="Search"/>
+                       placeholder="Search" style="font-family: 'open sans', sans-serif; color: #3c3c3c"/>
             </form>
         </div>
     </div>
@@ -104,7 +104,7 @@
             {% endblock %}
             <div class="footer">
                 <div class="pure-menu pure-menu-horizontal pure-menu-open">
-                    <ul style="padding: 0 0 0 0">
+                    <ul style="padding: 0 0 0 0; font-weight: 500">
                         <li class="pure-menu-item">
                             <a {% comment %}href="{% url "about_me" %}"{% endcomment %}
                                     onclick="construction_notice()"

@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 # django.contrib.staticfiles.finders.AppDirectoriesFinder). If multiple files
 # with the same name are present, the first file that is found will be used.
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/agency-theme"),
+    # os.path.join(BASE_DIR, "static/agency-theme"),
     os.path.join(BASE_DIR, "static/pure"),
     os.path.join(BASE_DIR, "static")
 ]
